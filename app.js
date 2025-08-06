@@ -30,13 +30,16 @@ function getAllRecipes() {
   console.log(allRecipes);
 }
 
-function updateRecipe(recipeId, newRecipeData) {
-  Recipe.findByIdAndUpdate(recipeId, newRecipeData, { new: true });
-  console.log();
+async function updateRecipe(recipeId, newRecipeData) {
+  await Recipe.findByIdAndUpdate(recipeId, newRecipeData, { new: true });
 }
 
-function deleteRecipe(recipeId) {
-  Recipe.findByIdAndDelete(recipeId);
+async function deleteRecipe(recipeId) {
+  try {
+    await Recipe.findByIdAndDelete(recipeId);
+  } catch (error) {
+    console.log(error);
+  }
 }
 function getRecipeById(id) {
   const found = Recipe.findById(id);
@@ -53,11 +56,11 @@ const newRecipe = {
 
 // createRecipe(newRecipe);
 // getAllRecipes();
-deleteRecipe("68935475b5acad8b5fdd766e");
+// deleteRecipe("68935475b5acad8b5fdd766e");
 
-updateRecipe("68935475b5acad8b5fdd766e", { name: "updatedname" });
+updateRecipe("6893547931ddbf11d2793149", { name: "updatedname" });
 
-getRecipeById("68935475b5acad8b5fdd766e");
+// getRecipeById("68935475b5acad8b5fdd766e");
 
 // Listen on port 3000
 const port = process.env.PORT || 3000;
